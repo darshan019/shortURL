@@ -21,8 +21,6 @@ func godot_env_var(key string) string {
 }
 
 func Initialize() {
-	// connstr := "postgres://postgres:darshan123@localhost:5432/ShortURL?sslmode=disable"
-
 	connstr := fmt.Sprintf("postgres://%s:%s@localhost:%s/%s?sslmode=disable", godot_env_var("DBUSERNAME"), godot_env_var("DBPASSWORD"), godot_env_var("PORT"), godot_env_var("DBNAME"))
 
 	var err error
