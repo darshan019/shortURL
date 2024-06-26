@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	// "html/template"
 	"short_url/app/middlewares"
 
 	"github.com/gorilla/mux"

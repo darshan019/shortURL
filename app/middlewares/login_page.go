@@ -15,7 +15,6 @@ type tokens struct {
 func Login_Manager() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
-			fmt.Println("login page i.e html")
 			return
 		}
 		user := models.User()
@@ -25,7 +24,7 @@ func Login_Manager() http.HandlerFunc {
 		check, err := auth.Login(user.Username, user.Email, user.Password)
 
 		if err != nil || !check {
-			fmt.Println("Error")
+			fmt.Println("Error: ", err)
 			return
 		}
 

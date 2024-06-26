@@ -6,6 +6,7 @@ import (
 	"short_url/app/handlers"
 
 	"github.com/gorilla/mux"
+	// "github.com/rs/cors"
 )
 
 func main() {
@@ -18,6 +19,8 @@ func main() {
 	handlers.Signup_Handler(router)
 	handlers.Login_Handler(router)
 	handlers.Redirect_Handler(router)
+
+	// handle := cors.Default().Handler(router)
 
 	http.ListenAndServe("localhost:8080", router)
 }
