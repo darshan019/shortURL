@@ -4,21 +4,20 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
-	// "github.com/joho/godotenv"
+	"github.com/joho/godotenv"
 )
 
-var secret_key = []byte("secret-key")
-
-// func godot_env_var(key string) string {
-// 	ok := godotenv.Load(".env")
-// 	if ok != nil {
-// 		fmt.Println("error loading env")
-// 	}
-// 	return os.Getenv(key)
-// }
+func godot_env_var(key string) string {
+	ok := godotenv.Load(".env")
+	if ok != nil {
+		fmt.Println("error loading env")
+	}
+	return os.Getenv(key)
+}
 
 func Create_token(username, email string) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
@@ -27,7 +26,7 @@ func Create_token(username, email string) (string, error) {
 		"exp":      time.Now().Add(time.Hour).Unix(),
 	})
 
-	token_string, err := token.SignedString(secret_key)
+	token_string, err := token.SignedString([]byte(godot_env_var("SECRETKEY")))
 	if err != nil {
 		return "", err
 	}
@@ -36,7 +35,7 @@ func Create_token(username, email string) (string, error) {
 
 func Verify_token(token_string string) (jwt.MapClaims, error) {
 	token, err := jwt.Parse(token_string, func(token *jwt.Token) (interface{}, error) {
-		return secret_key, nil
+		return []byte(godot_env_var("SECRETKEY")), nil
 	})
 
 	if err != nil {
