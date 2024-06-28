@@ -6,7 +6,7 @@ import (
 	"short_url/app/handlers"
 
 	"github.com/gorilla/mux"
-	// "github.com/rs/cors"
+	"github.com/rs/cors"
 )
 
 func main() {
@@ -20,7 +20,14 @@ func main() {
 	handlers.Login_Handler(router)
 	handlers.Redirect_Handler(router)
 
-	// handle := cors.Default().Handler(router)
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:5173"},
+		AllowedMethods:   []string{"GET", "PUT", "DELETE", "POST"},
+		AllowedHeaders:   []string{"Authorization", "Content-Type"},
+		AllowCredentials: true,
+	})
 
-	http.ListenAndServe("localhost:8080", router)
+	handle := c.Handler(router)
+
+	http.ListenAndServe("localhost:8080", handle)
 }

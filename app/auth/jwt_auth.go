@@ -7,9 +7,18 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
+	// "github.com/joho/godotenv"
 )
 
 var secret_key = []byte("secret-key")
+
+// func godot_env_var(key string) string {
+// 	ok := godotenv.Load(".env")
+// 	if ok != nil {
+// 		fmt.Println("error loading env")
+// 	}
+// 	return os.Getenv(key)
+// }
 
 func Create_token(username, email string) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{

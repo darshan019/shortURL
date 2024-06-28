@@ -13,7 +13,7 @@ func Root_page() http.HandlerFunc {
 		// fmt.Fprintf(w, "root page")
 		token_string := r.Header.Get("Authorization")
 		token_string = token_string[len("Bearer "):]
-		if token_string != "e" {
+		if token_string != "n" {
 			claims, ok := auth.Verify_token(token_string)
 			fmt.Println(token_string, claims)
 			if ok != nil {
@@ -42,7 +42,7 @@ func Root_page() http.HandlerFunc {
 				var short, long string
 				rows.Scan(&short, &long)
 
-				url := fmt.Sprintf("short: %s, long: %s", short, long)
+				url := fmt.Sprintf("short: http://localhost:8080/%s long: %s", short, long)
 				u.Urls = append(u.Urls, url)
 			}
 
