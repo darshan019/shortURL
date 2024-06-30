@@ -19,6 +19,7 @@ func main() {
 	handlers.Signup_Handler(router)
 	handlers.Login_Handler(router)
 	handlers.Redirect_Handler(router)
+	handlers.Delete_handler(router)
 
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:5173"},

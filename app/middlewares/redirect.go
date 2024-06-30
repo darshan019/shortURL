@@ -19,7 +19,7 @@ func Redirect(router *mux.Router) http.HandlerFunc {
 		fmt.Println("Got the link")
 
 		if err != nil {
-			fmt.Println("Error finding url")
+			fmt.Println("Error finding url", err)
 		}
 		http.Redirect(w, r, res, http.StatusMovedPermanently)
 	}
